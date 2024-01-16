@@ -12,4 +12,8 @@ export class AnimalsService {
     const cat = new this.catModel(input);
     return cat.save();
   }
+
+  findAll(): Promise<Cat[]> {
+    return this.catModel.find().exec();
+  }
 }
