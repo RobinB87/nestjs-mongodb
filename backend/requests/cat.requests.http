@@ -10,3 +10,7 @@ Content-Type: application/json
 
 ### GET
 GET http://localhost:3000/animals
+
+### GET by id
+GET http://localhost:3000/animals/65a6575373d98e92bf3b6914
+

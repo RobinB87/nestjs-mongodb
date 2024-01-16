@@ -16,4 +16,8 @@ export class AnimalsService {
   findAll(): Promise<Cat[]> {
     return this.catModel.find().exec();
   }
+
+  findById(id: string): Promise<Cat> {
+    return this.catModel.findById(id);
+  }
 }
