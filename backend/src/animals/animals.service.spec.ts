@@ -4,8 +4,9 @@ import { MockModel } from '../core/helpers/testing/mock-model';
 import { AnimalsService } from './animals.service';
 import { Cat } from './schemas/cat.schema';
 
+const catStub = { name: 'Whiskers', age: 3, breed: 'Persian' };
 class CatModelMock extends MockModel<Cat> {
-  protected entityStub = { name: 'Whiskers', age: 3, breed: 'Persian' };
+  protected entityStub = catStub;
 }
 
 describe('AnimalsService', () => {
@@ -31,5 +32,17 @@ describe('AnimalsService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  it('should create a cat', async () => {
+    // The save() simply creates an instance of the mongo document. This is why we have to test the save() method on the Prototype of the model
+    const saveSpy = jest.spyOn(CatModelMock.prototype, 'save');
+    const constructorSpy = jest.spyOn(CatModelMock.prototype, 'constructorSpy');
+
+    const result = await service.create(catStub);
+
+    expect(saveSpy).toHaveBeenCalledTimes(1);
+    expect(constructorSpy).toHaveBeenCalledWith(catStub);
+    expect(result).toEqual(catStub);
   });
 });
