@@ -7,3 +7,5 @@ play around with nest and mongodb
 cli:
 nest new backend
 npm i @nestjs/mongoose mongoose
+
+add mongo connection string in app.module
