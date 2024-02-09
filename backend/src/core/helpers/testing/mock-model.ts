@@ -10,4 +10,18 @@ export abstract class MockModel<T> {
   async save(): Promise<T> {
     return this.entityStub;
   }
+
+  findOne(): { exec: () => T } {
+    return {
+      exec: (): T => this.entityStub,
+    };
+  }
+
+  async find(): Promise<T[]> {
+    return [this.entityStub];
+  }
+
+  async findOneAndUpdate(): Promise<T> {
+    return this.entityStub;
+  }
 }
